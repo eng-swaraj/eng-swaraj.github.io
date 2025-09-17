@@ -8,7 +8,7 @@ export default function Portfolio() {
     linkedin: "https://www.linkedin.com/in/eng-swaraj",
     github: "https://github.com/eng-swaraj",
     location: "Bangalore Rural, Karnataka, India",
-    resume: "/Profile.pdf", // place Profile.pdf in public/ folder
+    resume: process.env.PUBLIC_URL + "/Profile.pdf", // ✅ Safe for GitHub Pages
   };
 
   const skills = [
@@ -55,13 +55,13 @@ export default function Portfolio() {
       title: "COVID-19 Tracker (OLED)",
       desc: "Final-year Arduino project displaying real-time COVID-19 stats on OLED.",
       link: "https://github.com/swaraj-kumar/VTU-Final-year-project",
-      img: "/project1.jpg",
+      img: process.env.PUBLIC_URL + "/project1.jpg", // ✅
     },
     {
       title: "AI Automation Pipeline",
       desc: "Automation pipeline for data ingestion, cleaning, and analysis using Python and AI models.",
       link: "https://github.com/eng-swaraj/ai-automation",
-      img: "/project2.jpg",
+      img: process.env.PUBLIC_URL + "/project2.jpg", // ✅
     },
   ];
 
@@ -116,7 +116,11 @@ export default function Portfolio() {
         {/* Hero */}
         <section id="about" className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <img src="/profile.jpg" alt="Swaraj Kumar" className="w-40 h-40 rounded-full shadow-lg mb-6 border-4 border-pink-200" />
+            <img
+              src={process.env.PUBLIC_URL + "/profile.jpg"} // ✅
+              alt="Swaraj Kumar"
+              className="w-40 h-40 rounded-full shadow-lg mb-6 border-4 border-pink-200"
+            />
             <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">
               Hi, I’m Swaraj 👋 <br />
               <span className="text-pink-600">AI Engineer & IoT Trainer</span>
@@ -125,13 +129,27 @@ export default function Portfolio() {
               I work with Generative AI, LLMs, and automation to build intelligent systems. With strong foundations in software engineering, I also train learners in IoT and embedded systems. My goal is to bridge cutting-edge AI with practical applications.
             </p>
             <div className="mt-6 flex gap-4 flex-wrap">
-              <a href={contact.resume} download className="px-5 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-full text-sm shadow-md transition">
+              <a
+                href={contact.resume}
+                download
+                className="px-5 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-full text-sm shadow-md transition"
+              >
                 Download Resume
               </a>
-              <a href={contact.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2 border rounded-full text-sm hover:border-pink-600 transition">
+              <a
+                href={contact.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 px-5 py-2 border rounded-full text-sm hover:border-pink-600 transition"
+              >
                 <Linkedin size={16} /> LinkedIn
               </a>
-              <a href={contact.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2 border rounded-full text-sm hover:border-pink-600 transition">
+              <a
+                href={contact.github}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 px-5 py-2 border rounded-full text-sm hover:border-pink-600 transition"
+              >
                 <Github size={16} /> GitHub
               </a>
             </div>
@@ -146,7 +164,9 @@ export default function Portfolio() {
             <p className="mt-6 text-sm font-medium text-zinc-600">Core Skills</p>
             <ul className="mt-3 flex flex-wrap gap-2 text-xs">
               {skills.slice(0, 4).map((s) => (
-                <li key={s} className="px-3 py-1 bg-pink-50 rounded-full shadow-sm">{s}</li>
+                <li key={s} className="px-3 py-1 bg-pink-50 rounded-full shadow-sm">
+                  {s}
+                </li>
               ))}
             </ul>
           </aside>
@@ -157,7 +177,11 @@ export default function Portfolio() {
           <h3 className="text-2xl font-bold">Projects</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {projects.map((p) => (
-              <motion.article key={p.title} whileHover={{ y: -5 }} className="bg-white p-6 rounded-2xl shadow-md border border-pink-100 hover:shadow-pink-200/50 transition">
+              <motion.article
+                key={p.title}
+                whileHover={{ y: -5 }}
+                className="bg-white p-6 rounded-2xl shadow-md border border-pink-100 hover:shadow-pink-200/50 transition"
+              >
                 <img src={p.img} alt={p.title} className="w-full h-40 object-cover rounded-lg mb-4" />
                 <h4 className="font-semibold text-lg">{p.title}</h4>
                 <p className="text-sm text-zinc-700 mt-2">{p.desc}</p>
@@ -177,12 +201,16 @@ export default function Portfolio() {
               <div key={e.role} className="border-l-4 border-pink-300 pl-4 hover:bg-pink-50 rounded-sm transition">
                 <div className="flex justify-between items-baseline">
                   <div>
-                    <h4 className="font-semibold text-lg">{e.role} — {e.company}</h4>
+                    <h4 className="font-semibold text-lg">
+                      {e.role} — {e.company}
+                    </h4>
                     <p className="text-sm text-zinc-600">{e.period}</p>
                   </div>
                 </div>
                 <ul className="mt-2 list-disc list-inside text-sm text-zinc-700 space-y-1">
-                  {e.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                  {e.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
                 </ul>
               </div>
             ))}
@@ -198,7 +226,9 @@ export default function Portfolio() {
                 <Award className="text-pink-600" size={20} />
                 <div>
                   <p className="font-medium">{a.title}</p>
-                  <p className="text-sm text-zinc-600">{a.org} — {a.year}</p>
+                  <p className="text-sm text-zinc-600">
+                    {a.org} — {a.year}
+                  </p>
                 </div>
               </div>
             ))}
@@ -214,7 +244,9 @@ export default function Portfolio() {
                 <BookOpenCheck className="text-pink-600" size={20} />
                 <div>
                   <p className="font-medium">{c.title}</p>
-                  <p className="text-sm text-zinc-600">{c.org} — {c.year}</p>
+                  <p className="text-sm text-zinc-600">
+                    {c.org} — {c.year}
+                  </p>
                 </div>
               </div>
             ))}
@@ -228,7 +260,9 @@ export default function Portfolio() {
             {education.map((ed, i) => (
               <div key={i} className="flex flex-col">
                 <p className="font-medium">{ed.level}</p>
-                <p className="text-sm text-zinc-600">{ed.school} — {ed.period}</p>
+                <p className="text-sm text-zinc-600">
+                  {ed.school} — {ed.period}
+                </p>
               </div>
             ))}
           </div>
@@ -245,7 +279,9 @@ export default function Portfolio() {
                   <a href={art.link} target="_blank" rel="noreferrer" className="font-medium hover:underline text-pink-700">
                     {art.title}
                   </a>
-                  <p className="text-sm text-zinc-600">{art.platform} — {art.date}</p>
+                  <p className="text-sm text-zinc-600">
+                    {art.platform} — {art.date}
+                  </p>
                 </div>
               </div>
             ))}
@@ -257,7 +293,10 @@ export default function Portfolio() {
           <h3 className="text-2xl font-bold">Skills & Tools</h3>
           <div className="mt-6 flex flex-wrap gap-3">
             {skills.map((s) => (
-              <span key={s} className="px-4 py-2 bg-pink-50 hover:bg-pink-100 border border-pink-100 rounded-full text-sm transition">
+              <span
+                key={s}
+                className="px-4 py-2 bg-pink-50 hover:bg-pink-100 border border-pink-100 rounded-full text-sm transition"
+              >
                 {s}
               </span>
             ))}
@@ -265,16 +304,27 @@ export default function Portfolio() {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="bg-gradient-to-r from-pink-600 to-rose-700 text-white p-10 rounded-2xl text-center shadow-xl">
+        <section
+          id="contact"
+          className="bg-gradient-to-r from-pink-600 to-rose-700 text-white p-10 rounded-2xl text-center shadow-xl"
+        >
           <h3 className="text-3xl font-bold">Let’s connect 🚀</h3>
           <p className="mt-4 text-base max-w-xl mx-auto">
             Working on AI-powered solutions and IoT training. If you’re looking for collaboration or training sessions, let’s connect!
           </p>
           <div className="mt-6 flex justify-center gap-4">
-            <a href={`mailto:${contact.email}`} className="px-6 py-3 bg-white text-pink-700 font-semibold rounded-full shadow hover:scale-105 transition">
+            <a
+              href={`mailto:${contact.email}`}
+              className="px-6 py-3 bg-white text-pink-700 font-semibold rounded-full shadow hover:scale-105 transition"
+            >
               Email me
             </a>
-            <a href={contact.linkedin} target="_blank" rel="noreferrer" className="px-6 py-3 border border-white rounded-full hover:bg-white/10 transition">
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="px-6 py-3 border border-white rounded-full hover:bg-white/10 transition"
+            >
               Connect on LinkedIn
             </a>
           </div>
